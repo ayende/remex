@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remex", "Remex\Remex.csproj", "{D77EDAF3-D679-4D06-834B-7C85D0269B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remex.Tests", "Remex.Tests\Remex.Tests.csproj", "{F3E2583B-A55E-4AA4-AF3B-2B6E9D426011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remex.Tryouts", "Remex.Tryouts\Remex.Tryouts.csproj", "{5AB00564-49EC-482B-9643-A10D8F9B9402}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D77EDAF3-D679-4D06-834B-7C85D0269B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77EDAF3-D679-4D06-834B-7C85D0269B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77EDAF3-D679-4D06-834B-7C85D0269B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77EDAF3-D679-4D06-834B-7C85D0269B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E2583B-A55E-4AA4-AF3B-2B6E9D426011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E2583B-A55E-4AA4-AF3B-2B6E9D426011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E2583B-A55E-4AA4-AF3B-2B6E9D426011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E2583B-A55E-4AA4-AF3B-2B6E9D426011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB00564-49EC-482B-9643-A10D8F9B9402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB00564-49EC-482B-9643-A10D8F9B9402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB00564-49EC-482B-9643-A10D8F9B9402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB00564-49EC-482B-9643-A10D8F9B9402}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

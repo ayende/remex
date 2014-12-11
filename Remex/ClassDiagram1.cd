@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Remex.Pipe">
+    <Position X="2.75" Y="1.75" Width="4.25" />
+    <Members>
+      <Field Name="_cancellationToken" Hidden="true" />
+      <Field Name="_log" Hidden="true" />
+      <Field Name="_options" Hidden="true" />
+      <Field Name="_outgoing" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="DisposeAsync" Hidden="true" />
+      <Field Name="disposed" Hidden="true" />
+      <Method Name="GetIncomingMessageAsync" Hidden="true" />
+      <Method Name="OnDisconnected" Hidden="true" />
+      <Method Name="Pipe" Hidden="true" />
+      <Method Name="ReadTask" Hidden="true" />
+      <Method Name="WriteTask" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAAAIAASAAAMAAAABASAAgAAACEAAAAAAAAgEAAAA=</HashCode>
+      <FileName>Pipe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Remex.TcpListenerPiper">
+    <Position X="7.75" Y="2.75" Width="5" />
+    <Members>
+      <Field Name="_acceptConnectionsTask" Hidden="true" />
+      <Field Name="_cancellationTokenSource" Hidden="true" />
+      <Field Name="_incoming" Hidden="true" />
+      <Field Name="_options" Hidden="true" />
+      <Field Name="_pipes" Hidden="true" />
+      <Field Name="_tcpListener" Hidden="true" />
+      <Method Name="AcceptConnections" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="DisposeAsync" Hidden="true" />
+      <Field Name="disposed" Hidden="true" />
+      <Method Name="GetIncomingMessageAsync" Hidden="true" />
+      <Method Name="OnOnPipeConnected" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAAIBgASAEAIAAAAAAAAAgEgQCAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>TcpListenerPiper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
