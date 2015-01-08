@@ -2,21 +2,37 @@
 using System.IO;
 using System.Threading.Tasks.Dataflow;
 using Newtonsoft.Json;
+using Remex.Gossip;
+using Remex.Transport;
 
 namespace Remex.Tryouts
 {
 	class Program
 	{
-		static void Main()
+		static void Main(string[]args)
 		{
-			var b = new BufferBlock<string>();
-			b.SendAsync("test").Wait();
-			Console.WriteLine(b.Completion.IsCompleted);
-			var receiveAsync = b.ReceiveAsync(TimeSpan.FromSeconds(2)).Result;
-			Console.WriteLine(receiveAsync);
+			if (args.Length == 0)
+			{
+				var g1 = new GossipTransport(new PipeOptions
+				{
+					Port = 0,
+				});
+				Console.WriteLine(g1.Options.Port);
+				Console.ReadLine();
+			}
 
-			receiveAsync = b.ReceiveAsync(TimeSpan.FromSeconds(2)).Result;
-			Console.WriteLine(receiveAsync);
+			var g2 = new GossipTransport(new PipeOptions
+			{
+				Port = 0,
+			});
+			g2.Join(new NodeConnectionInfo
+			{
+				Port = int.Parse(args[0]),
+				Host = "localhost"
+			});
+			Console.WriteLine(g2.Options.Port);
+			Console.ReadLine();
+
 		}
 	}
 

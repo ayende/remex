@@ -14,13 +14,14 @@ namespace Remex
 		 private readonly NodeConnectionInfo _connectionInfo;
 		private readonly TcpListenerPiper _listenerPiper;
 		private readonly Task _connectionTask;
+		private readonly string _description;
 
 		public OutgoingPipe(NodeConnectionInfo connectionInfo, CancellationToken externalToken, PipeOptions options, TcpListenerPiper listenerPiper)
 			: base(externalToken, options)
 		{
 			_connectionInfo = connectionInfo;
 			_listenerPiper = listenerPiper;
-
+			_description = _connectionInfo.ToString();
 			_connectionTask = ConnectionTask();
 		}
 
@@ -65,6 +66,11 @@ namespace Remex
 		protected override Task GetIncomingMessageAsync(object msg)
 		{
 			return _listenerPiper.GetIncomingMessageAsync(msg, this);
+		}
+
+		public override string Description
+		{
+			get { return _description; }
 		}
 
 		public async override Task DisposeAsync()

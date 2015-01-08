@@ -58,9 +58,9 @@ namespace Remex
 				{
 					if (usedBuffer > 3)
 					{
-						for (int i = 0; i < usedBuffer-1; i++)
+						for (int i = 0; i < usedBuffer - 1; i++)
 						{
-							if (readBuffer[i] == (byte)'\r' && readBuffer[i+1] == (byte)'\n')
+							if (readBuffer[i] == (byte)'\r' && readBuffer[i + 1] == (byte)'\n')
 							{
 								var lenAsStr = Encoding.UTF8.GetString(readBuffer, 0, i);
 
@@ -102,7 +102,7 @@ namespace Remex
 					readMsgTask = stream.ReadAsync(readBuffer, usedBuffer, readBuffer.Length - usedBuffer, _cancellationToken.Token);
 					continue;
 				}
-				var msg = serializer.Deserialize(new StreamReader(new MemoryStream(readBuffer, 0, currentLength)),typeof(object));
+				var msg = serializer.Deserialize(new StreamReader(new MemoryStream(readBuffer, 0, currentLength)), typeof(object));
 				if (msg != null)
 					await GetIncomingMessageAsync(msg);
 
@@ -118,7 +118,7 @@ namespace Remex
 				currentLength = -1;
 
 				readMsgTask = remainingLength > 0 ?
-					Task.FromResult(remainingLength) : 
+					Task.FromResult(remainingLength) :
 					stream.ReadAsync(readBuffer, 0, readBuffer.Length, _cancellationToken.Token);
 			}
 		}
@@ -142,17 +142,20 @@ namespace Remex
 				try
 				{
 					var msg = await _outgoing.ReceiveAsync(_options.PingRecurrence, _cancellationToken.Token);
-					serializer.Serialize(streamWriter, msg, typeof (object));
+					_log.Debug("Writing {0} to {1}", msg, Description);
+					serializer.Serialize(streamWriter, msg, typeof(object));
 				}
 				catch (TimeoutException)
 				{
 					if (_cancellationToken.IsCancellationRequested)
-						throw;
+					{
+						shouldDispose = true;
+					}
 					// we proceed with an empty message
 				}
 				catch (Exception e)
 				{
-					_log.Warn("Got an error reading messages",e);
+					_log.Warn("Got an error reading messages", e);
 					// this probably indicate that we are broken in some manner
 					shouldDispose = true;
 				}
@@ -169,15 +172,17 @@ namespace Remex
 				if (size + 2 >= lenBuffer.Length)
 					throw new IOException("Message size is WAY too large");
 				lenBuffer[size] = (byte)'\r';
-				lenBuffer[size+1] = (byte)'\n';
+				lenBuffer[size + 1] = (byte)'\n';
 
 				await stream.WriteAsync(lenBuffer, 0, size + 2);
-				await stream.WriteAsync(writeBuffer.GetBuffer(), 0, (int) writeBuffer.Length);
+				await stream.WriteAsync(writeBuffer.GetBuffer(), 0, (int)writeBuffer.Length);
 
 				if (_outgoing.Count == 0)
 					await stream.FlushAsync(_cancellationToken.Token);
 			}
 		}
+
+		public abstract string Description { get; }
 
 		public void Write(object msg)
 		{

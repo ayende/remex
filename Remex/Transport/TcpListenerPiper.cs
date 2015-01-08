@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
+using NLog;
 
 namespace Remex
 {
@@ -20,6 +21,7 @@ namespace Remex
 
 		private readonly ConcurrentDictionary<IncomingPipe, object> _pipes = new ConcurrentDictionary<IncomingPipe, object>();
 
+		private readonly Logger _log = LogManager.GetCurrentClassLogger();
 
 		public TcpListenerPiper(PipeOptions options, CancellationToken token)
 		{
@@ -30,6 +32,9 @@ namespace Remex
 			_tcpListener = new TcpListener(IPAddress.Any, options.Port);
 			_tcpListener.Start();
 			options.Port = ((IPEndPoint) _tcpListener.LocalEndpoint).Port;
+
+			_log.Info("Pipe listening on: {0}", options.Port);
+
 			_acceptConnectionsTask = AcceptConnections();
 		}
 

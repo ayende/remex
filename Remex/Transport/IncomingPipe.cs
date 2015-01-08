@@ -10,10 +10,12 @@ namespace Remex
 	{
 		private readonly TcpListenerPiper _parent;
 		private readonly Task _connectionTask;
+		private readonly string _description;
+
 		public IncomingPipe(CancellationToken externalToken, PipeOptions options, TcpClient client, TcpListenerPiper parent) : base(externalToken, options)
 		{
 			_parent = parent;
-
+			_description = client.Client.RemoteEndPoint.ToString();
 			_connectionTask = ConnectionTask(client);
 		}
 
@@ -38,6 +40,8 @@ namespace Remex
 		{
 			return _parent.GetIncomingMessageAsync(msg, this);
 		}
+
+		public override string Description { get { return _description; } }
 
 		public async override Task DisposeAsync()
 		{
